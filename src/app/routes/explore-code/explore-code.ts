@@ -22,7 +22,7 @@ export const EXPLORE_CODE_ROUTES: Routes = [
     path: 'explore-code',
     component: ExploreCodeComponent,
     children: [
-      { path: '', redirectTo: 'agencies/' + AGENCIES[0].id },
+     // { path: '', redirectTo: 'agencies/' + AGENCIES[0].id },
       { path: 'agencies',
         component: AgenciesComponent,
         children: [
@@ -56,6 +56,13 @@ export const EXPLORE_CODE_ROUTES: Routes = [
     RepoComponent,
     ReposComponent,
     ActivityListComponent
-  ]
+  ],
+  exports: [AgencySidebarComponent,
+    AgenciesComponent,
+    AgencyComponent,
+    ExploreCodeComponent,
+    RepoComponent,
+    ReposComponent,
+    ActivityListComponent]
 })
 export class ExploreCodeModule {}
