@@ -29,6 +29,14 @@
   <%= webpackConfig.htmlElements.headTags %>
   <% } %>
 
+  <% if (htmlWebpackPlugin.options.metadata.ENV == 'production') { %>
+  <script type="text/javascript">
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw-precache.js');
+  }
+  </script>
+  <% } %>
+
   <!-- base url -->
   <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 </head>

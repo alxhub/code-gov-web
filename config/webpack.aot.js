@@ -2,10 +2,8 @@ const ngToolsWebpack = require('@ngtools/webpack');
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
-<<<<<<< HEAD
 const ghDeploy = require('./github-deploy');
-=======
->>>>>>> eb1fd6e... feature(build): enable AoT compilation
+
 
 /**
  * Webpack Constants
@@ -35,6 +33,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const OptimizeJsPlugin = require("optimize-js-plugin");
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
   host: HOST,
@@ -143,6 +142,12 @@ module.exports = {
       chunksSortMode: 'dependency',
       metadata: METADATA,
       inject: 'head'
+    }),
+
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'code-gov',
+      filename: 'sw-precache.js',
+      maximumFileSizeToCacheInBytes: 4194304
     })
   ],
   module: {
